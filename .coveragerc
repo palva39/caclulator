@@ -1,0 +1,8 @@
+[run]
+omit =
+    /usr/lib/python3/*
+
+[report]
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
