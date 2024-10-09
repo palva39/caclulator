@@ -48,7 +48,9 @@ def test_calculation_repr():
     """
     calc = Calculation(Decimal('10'), Decimal('5'), add)
     expected_repr = "Calculation(10, 5, add)"
-    assert calc.__repr__()==expected_repr,"The __repr__ method output does not match the expected string."
+    assert calc.__repr__() == expected_repr, (
+    "The __repr__ method output does not match the expected string."
+)
 
 def test_divide_by_zero():
     """
