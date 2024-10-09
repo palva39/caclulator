@@ -4,7 +4,7 @@ using Faker and providing custom test data for calculator tests.
 """
 # conftest.py
 from decimal import Decimal
-import pytest
+import pytest # pylint: disable=unused-import
 from faker import Faker
 from calculator.operations import add, subtract, multiply, divide
 
@@ -35,10 +35,7 @@ def generate_test_data(num_records):
             b = Decimal('1') # Avoid division by zero by setting b to 1
 
         try:
-            if operation_func == divide and b == Decimal('0'):
-                expected = "ZeroDivisionError"
-            else:
-                expected = operation_func(a, b)
+            expected = operation_func(a, b)
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
 
@@ -53,7 +50,8 @@ def pytest_addoption(parser):
 
 def pytest_generate_tests(metafunc):
     """
-    Generate dynamic tests based on the number of records specified through the --num_records option.
+    Generate dynamic tests based on the number of records 
+    specified through the --num_records option.
     """
     if {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
