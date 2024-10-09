@@ -31,7 +31,7 @@ def generate_test_data(num_records):
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
         operation_func = operation_mappings[operation_name]
 
-        if operation_func == divide and b == Decimal('0'):
+        if operation_func is divide and b == Decimal('0'):
             b = Decimal('1') # Avoid division by zero by setting b to 1
 
         try:
