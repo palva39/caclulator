@@ -61,16 +61,16 @@ def test_get_latest(setup_calculations):
     # in the setup_calculations fixture.
     assert latest.a == Decimal('20') and latest.b == Decimal('3'), "Did not get the correct latest calculation"
 
-def test_find_by_operation(setup_calculations):
+def test_find_by_operation(setup_calculations): # pylint: disable=unnecessary-dunder-call, invalid-name
     """Test finding calculations in the history by operation type."""
     # Find all calculations with the 'add' operation.
     add_operations = Calculations.find_by_operation("add")
     # Assert that exactly one calculation with the 'add' operation was found.
-    assert len(add_operations) == 1, "Did not find the correct number of calculations with add operation"
+    assert len(add_operations) == 1, "Did not find the correct number of calculations with add operation" # pylint: disable=unnecessary-dunder-call, invalid-name
     # Find all calculations with the 'subtract' operation.
     subtract_operations = Calculations.find_by_operation("subtract")
     # Assert that exactly one calculation with the 'subtract' operation was found.
-    assert len(subtract_operations) == 1, "Did not find the correct number of calculations with subtract operation"
+    assert len(subtract_operations) == 1, "Did not find the correct number of calculations with subtract operation" # pylint: disable=unnecessary-dunder-call, invalid-name
 
 def test_get_latest_with_empty_history():
     """Test getting the latest calculation when the history is empty."""
