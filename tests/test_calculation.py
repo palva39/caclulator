@@ -5,13 +5,6 @@ The tests are designed to verify the correctness of basic arithmetic operations
 (addition, subtraction, multiplication, division) implemented in the calculator.operations module,
 as well as the functionality of the Calculation class that encapsulates these operations.
 """
-
-# Import statements:
-# Disable specific pylint warnings that are not relevant for this test file.
-# Import the Decimal class for precise decimal arithmetic, which is especially useful in financial calculations.
-# Import pytest for writing test cases.
-# Import the Calculation class from the calculator package to test its functionality.
-# Import the arithmetic operation functions (add, subtract, multiply, divide) to be tested.
 # pylint: disable=unnecessary-dunder-call, invalid-name
 from decimal import Decimal
 import pytest
@@ -42,7 +35,7 @@ def test_calculation_operations(a, b, operation, expected):
         operation (function): The arithmetic operation to perform.
         expected (Decimal): The expected result of the operation.
     """
-    calc = Calculation(a, b, operation)  # Create a Calculation instance with the provided operands and operation.
+    calc = Calculation(a, b, operation)
     assert calc.perform() == expected, f"Failed {operation.__name__} operation with {a} and {b}"
 
 def test_calculation_repr():
