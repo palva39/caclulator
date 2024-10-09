@@ -17,7 +17,7 @@ from calculator.operations import add, subtract
 # a setup mechanism used by pytest to initialize a test environment.
 # Here, it's used to define a fixture that prepares the test environment for calculations tests.
 @pytest.fixture
-def setup_calculations():
+def setup_calculations():# pylint: disable=unnecessary-dunder-call, invalid-name
     """Clear history and add sample calculations for tests."""
     # Clear any existing calculation history to ensure a clean state for each test.
     Calculations.clear_history()
@@ -62,7 +62,7 @@ def test_get_latest(setup_calculations):
     assert latest.a == Decimal('20') and latest.b == Decimal('3'),(
     "Did not get the correct latest calculation")
 
-def test_find_by_operation(setup_calculations): # pylint: disable=unnecessary-dunder-call, invalid-name
+def test_find_by_operation(setup_calculations):
     """Test finding calculations in the history by operation type."""
     # Find all calculations with the 'add' operation.
     add_operations = Calculations.find_by_operation("add")
