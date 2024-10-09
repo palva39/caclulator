@@ -21,10 +21,10 @@ def generate_test_data(num_records):
             Decimal(fake.random_number(digits=1)))
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
         operation_func = operation_mappings[operation_name]
-        
+
         if operation_func == divide:
             b = Decimal('1') if b == Decimal('0') else b
-        
+
         try:
             if operation_func == divide and b == Decimal('0'):
                 expected = "ZeroDivisionError"
@@ -32,7 +32,7 @@ def generate_test_data(num_records):
                 expected = operation_func(a, b)
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
-        
+
         yield a, b, operation_name, operation_func, expected
 
 def pytest_addoption(parser):
@@ -45,6 +45,7 @@ def pytest_generate_tests(metafunc):
         num_records = metafunc.config.getoption("num_records")
         parameters = list(generate_test_data(num_records))
         # Modify parameters to fit test functions' expectations
-        modified_parameters = [(a, b, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected)
+        modified_parameters = [
+            (a, b, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected)
                                for a, b, op_name, op_func, expected in parameters]
         metafunc.parametrize("a,b,operation,expected", modified_parameters)
