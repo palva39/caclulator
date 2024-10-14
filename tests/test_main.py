@@ -1,20 +1,83 @@
-"""test for main.py error handling"""
+"""New test for main.py that uses the repl and command patterns
+   and uses user input to test it with mock
+"""
+from unittest import mock
 import pytest
-from main import calculate_and_print  # Ensure this import matches your project structure
+from main import repl, parse_command
 
-# Parameterize the test function to cover different operations and scenarios, including errors
-@pytest.mark.parametrize("a_string, b_string, operation_string, expected_string", [
-    ("5", "3", 'add', "The result of 5 add 3 is equal to 8"),
-    ("10", "2", 'subtract', "The result of 10 subtract 2 is equal to 8"),
-    ("4", "5", 'multiply', "The result of 4 multiply 5 is equal to 20"),
-    ("20", "4", 'divide', "The result of 20 divide 4 is equal to 5"),
-    ("1", "0", 'divide', "An error occurred: Cannot divide by zero"),
-    ("9", "3", 'unknown', "Unknown operation: unknown"),
-    ("a", "3", 'add', "Invalid number input: a or 3 is not a valid number."),
-    ("5", "b", 'subtract', "Invalid number input: 5 or b is not a valid number.")
-])
-def test_calculate_and_print(a_string, b_string, operation_string,expected_string, capsys):
-    """Gets the a,b, operation and prints"""
-    calculate_and_print(a_string, b_string, operation_string)
-    captured = capsys.readouterr()
-    assert captured.out.strip() == expected_string
+# Test the command parsing logic
+def test_parse_command_add():
+    """Test add command parsing"""
+    command, num1, num2 = parse_command("add 2 3")
+    assert command.execute(num1, num2) == 5
+
+def test_parse_command_subtract():
+    """Test subtract command parsing"""
+    command, num1, num2 = parse_command("subtract 5 2")
+    assert command.execute(num1, num2) == 3
+
+def test_parse_command_multiply():
+    """Test multiply command parsing"""
+    command, num1, num2 = parse_command("multiply 3 4")
+    assert command.execute(num1, num2) == 12
+
+def test_parse_command_divide():
+    """Test divide command parsing"""
+    command, num1, num2 = parse_command("divide 10 2")
+    assert command.execute(num1, num2) == 5
+
+    with pytest.raises(ValueError):
+        command, num1, num2 = parse_command("divide 5 0")
+        command.execute(num1, num2)
+
+def test_invalid_command():
+    """Test invalid command handling"""
+    with pytest.raises(ValueError):
+        parse_command("invalid 5 2")
+
+# Mock the input and print functions to simulate REPL interaction
+def test_repl_add_command():
+    """Test REPL with add command"""
+    user_inputs = ['add 2 3', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+
+    mock_print.assert_any_call("Result: 5.0")
+    mock_print.assert_any_call("Goodbye!")
+
+def test_repl_subtract_command():
+    """Test REPL with subtract command"""
+    user_inputs = ['subtract 5 3', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+
+    mock_print.assert_any_call("Result: 2.0")
+    mock_print.assert_any_call("Goodbye!")
+
+def test_repl_invalid_command():
+    """Test REPL with invalid command"""
+    user_inputs = ['invalid_command 1 2', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+
+    mock_print.assert_any_call("Error: Unknown command: invalid_command")
+
+def test_repl_divide_by_zero():
+    """Test REPL with divide by zero"""
+    user_inputs = ['divide 4 0', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+
+    mock_print.assert_any_call("Error: Cannot divide by zero")
+
+def test_repl_insufficient_arguments():
+    """Test REPL with insufficient arguments."""
+    user_inputs = ['add 2', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+    mock_print.assert_any_call("Error: Invalid input format. Use: <command> <num1> <num2>")
