@@ -1,37 +1,49 @@
-import sys
-from calculator import Calculator
-from decimal import Decimal, InvalidOperation
+# main.py
+from calculator.commands import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
 
-def calculate_and_print(a, b, operation_name):
-    operation_mappings = {
-        'add': Calculator.add,
-        'subtract': Calculator.subtract,
-        'multiply': Calculator.multiply,
-        'divide': Calculator.divide
-    }
+def parse_command(input_str):
+    """Parse the user input to identify the command and its arguments."""
+    parts = input_str.strip().split()
+    if len(parts) < 3:
+        raise ValueError("Invalid input format. Use: <command> <num1> <num2>")
 
-    # Unified error handling for decimal conversion
+    command_str = parts[0]
     try:
-        a_decimal, b_decimal = map(Decimal, [a, b])
-        result = operation_mappings.get(operation_name) # Use get to handle unknown operations
-        if result:
-            print(f"The result of {a} {operation_name} {b} is equal to {result(a_decimal, b_decimal)}")
-        else:
-            print(f"Unknown operation: {operation_name}")
-    except InvalidOperation:
-        print(f"Invalid number input: {a} or {b} is not a valid number.")
-    except ZeroDivisionError:
-        print("Error: Division by zero.")
-    except Exception as e: # Catch-all for unexpected errors
-        print(f"An error occurred: {e}")
+        num1 = float(parts[1])
+        num2 = float(parts[2])
+    except ValueError:
+        raise ValueError("Invalid numbers provided.")
 
-def main():
-    if len(sys.argv) != 4:
-        print("Usage: python calculator_main.py <number1> <number2> <operation>")
-        sys.exit(1)
-    
-    _, a, b, operation = sys.argv
-    calculate_and_print(a, b, operation)
+    if command_str == 'add':
+        return AddCommand(), num1, num2
+    elif command_str == 'subtract':
+        return SubtractCommand(), num1, num2
+    elif command_str == 'multiply':
+        return MultiplyCommand(), num1, num2
+    elif command_str == 'divide':
+        return DivideCommand(), num1, num2
+    else:
+        raise ValueError(f"Unknown command: {command_str}")
 
-if __name__ == '__main__':
-    main()
+def repl():
+    """Start the REPL loop."""
+    print("Welcome to the interactive calculator!")
+    print("Available commands: add, subtract, multiply, divide")
+    print("Usage: <command> <num1> <num2> (example: add 2 3)")
+    print("Type 'exit' to quit.")
+
+    while True:
+        user_input = input("Enter command: ")
+        if user_input.strip().lower() == 'exit':
+            print("Goodbye!")
+            break
+
+        try:
+            command, num1, num2 = parse_command(user_input)
+            result = command.execute(num1, num2)
+            print(f"Result: {result}")
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    repl()
