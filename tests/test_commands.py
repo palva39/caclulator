@@ -32,3 +32,15 @@ def test_divide_command():
 
     with pytest.raises(ValueError):
         command.execute(5, 0)
+
+def test_add_command_invalid_input():
+    """Test AddCommand with invalid inputs."""
+    command = AddCommand()
+    with pytest.raises(TypeError):
+        command.execute("a", 3)
+
+def test_subtract_command_invalid_input():
+    """Test SubtractCommand with invalid inputs."""
+    command = SubtractCommand()
+    with pytest.raises(TypeError):
+        command.execute("a", "b")
