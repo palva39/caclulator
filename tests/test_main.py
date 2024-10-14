@@ -81,4 +81,3 @@ def test_repl_insufficient_arguments():
         with mock.patch('builtins.print') as mock_print:
             repl()
     mock_print.assert_any_call("Error: Invalid input format. Use: <command> <num1> <num2>")
-    
