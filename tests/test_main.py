@@ -1,5 +1,4 @@
 # tests/test_main.py
-import pytest
 import sys
 import os
 import pytest
