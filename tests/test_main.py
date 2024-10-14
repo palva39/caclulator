@@ -1,20 +1,27 @@
-"""test for main.py error handling"""
+# tests/test_main.py
 import pytest
-from main import calculate_and_print  # Ensure this import matches your project structure
+from calculator.main import parse_command
 
-# Parameterize the test function to cover different operations and scenarios, including errors
-@pytest.mark.parametrize("a_string, b_string, operation_string, expected_string", [
-    ("5", "3", 'add', "The result of 5 add 3 is equal to 8"),
-    ("10", "2", 'subtract', "The result of 10 subtract 2 is equal to 8"),
-    ("4", "5", 'multiply', "The result of 4 multiply 5 is equal to 20"),
-    ("20", "4", 'divide', "The result of 20 divide 4 is equal to 5"),
-    ("1", "0", 'divide', "An error occurred: Cannot divide by zero"),
-    ("9", "3", 'unknown', "Unknown operation: unknown"),
-    ("a", "3", 'add', "Invalid number input: a or 3 is not a valid number."),
-    ("5", "b", 'subtract', "Invalid number input: 5 or b is not a valid number.")
-])
-def test_calculate_and_print(a_string, b_string, operation_string,expected_string, capsys):
-    """Gets the a,b, operation and prints"""
-    calculate_and_print(a_string, b_string, operation_string)
-    captured = capsys.readouterr()
-    assert captured.out.strip() == expected_string
+def test_parse_command_add():
+    command, num1, num2 = parse_command("add 2 3")
+    assert command.execute(num1, num2) == 5
+
+def test_parse_command_subtract():
+    command, num1, num2 = parse_command("subtract 5 2")
+    assert command.execute(num1, num2) == 3
+
+def test_parse_command_multiply():
+    command, num1, num2 = parse_command("multiply 3 4")
+    assert command.execute(num1, num2) == 12
+
+def test_parse_command_divide():
+    command, num1, num2 = parse_command("divide 10 2")
+    assert command.execute(num1, num2) == 5
+
+    with pytest.raises(ValueError):
+        command, num1, num2 = parse_command("divide 5 0")
+        command.execute(num1, num2)
+
+def test_invalid_command():
+    with pytest.raises(ValueError):
+        parse_command("invalid 5 2")
