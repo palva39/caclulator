@@ -1,6 +1,6 @@
 import pytest
 from unittest import mock
-from calculator.main import repl, parse_command
+from main import repl, parse_command
 
 # Test the command parsing logic
 def test_parse_command_add():
