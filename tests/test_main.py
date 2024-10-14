@@ -1,5 +1,8 @@
-import pytest
+"""New test for main.py that uses the repl and command patterns
+   and uses user input to test it with mock
+"""
 from unittest import mock
+import pytest
 from main import repl, parse_command
 
 # Test the command parsing logic
