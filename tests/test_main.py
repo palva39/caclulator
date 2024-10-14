@@ -1,5 +1,9 @@
 # tests/test_main.py
 import pytest
+import sys
+import os
+import pytest
+from unittest import mock
 from main import parse_command
 
 # Tests for parse_command function
