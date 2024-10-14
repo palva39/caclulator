@@ -61,3 +61,8 @@ def pytest_generate_tests(metafunc):
             (a, b, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected)
                                for a, b, op_name, op_func, expected in parameters]
         metafunc.parametrize("a,b,operation,expected", modified_parameters)
+
+# Assuming you have fixture setup in conftest.py
+def test_fixture_setup(fixture_name):
+    """Test that the fixture is set up correctly."""
+    assert fixture_name is not None
