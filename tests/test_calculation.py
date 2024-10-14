@@ -54,3 +54,14 @@ def test_divide_by_zero():
     calc = Calculation(Decimal('10'), Decimal('0'), divide)
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         calc.perform()
+
+def test_calculation_with_invalid_data():
+    """Test Calculation initialization with invalid data."""
+    with pytest.raises(TypeError):
+        Calculation("not_a_number", 2)
+
+def test_calculation_edge_cases():
+    """Test Calculation with edge cases."""
+    calc = Calculation(0, 0)
+    assert calc.value1 == 0
+    assert calc.value2 == 0
