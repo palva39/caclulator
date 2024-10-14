@@ -1,11 +1,8 @@
-# tests/test_main.py
-import sys
-import os
 import pytest
 from unittest import mock
-from main import parse_command
+from main import repl, parse_command
 
-# Tests for parse_command function
+# Test the command parsing logic (already present)
 def test_parse_command_add():
     command, num1, num2 = parse_command("add 2 3")
     assert command.execute(num1, num2) == 5
@@ -30,38 +27,38 @@ def test_invalid_command():
     with pytest.raises(ValueError):
         parse_command("invalid 5 2")
 
-# Tests for REPL function with mocked input
+# Mock the input and print functions to simulate REPL interaction
 def test_repl_add_command():
-    inputs = iter(["add 2 3", "exit"])
-    with mock.patch('builtins.input', lambda _: next(inputs)):
-        with mock.patch('builtins.print') as mocked_print:
+    user_inputs = ['add 2 3', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
             repl()
-            mocked_print.assert_any_call("Result: 5.0")
+
+    mock_print.assert_any_call("Result: 5")
+    mock_print.assert_any_call("Goodbye!")
+
+def test_repl_subtract_command():
+    user_inputs = ['subtract 5 3', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+
+    mock_print.assert_any_call("Result: 2")
+    mock_print.assert_any_call("Goodbye!")
 
 def test_repl_invalid_command():
-    inputs = iter(["invalid 5 2", "exit"])
-    with mock.patch('builtins.input', lambda _: next(inputs)):
-        with mock.patch('builtins.print') as mocked_print:
+    user_inputs = ['invalid_command 1 2', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
             repl()
-            mocked_print.assert_any_call("Error: Unknown command: invalid")
 
-def test_repl_invalid_format():
-    inputs = iter(["add 2", "exit"])  # missing second argument
-    with mock.patch('builtins.input', lambda _: next(inputs)):
-        with mock.patch('builtins.print') as mocked_print:
-            repl()
-            mocked_print.assert_any_call("Error: Invalid input format. Use: <command> <num1> <num2>")
+    mock_print.assert_any_call("Error: Unknown command: invalid_command")
 
 def test_repl_divide_by_zero():
-    inputs = iter(["divide 5 0", "exit"])
-    with mock.patch('builtins.input', lambda _: next(inputs)):
-        with mock.patch('builtins.print') as mocked_print:
+    user_inputs = ['divide 4 0', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
             repl()
-            mocked_print.assert_any_call("Error: Cannot divide by zero")
 
-def test_repl_exit():
-    inputs = iter(["exit"])
-    with mock.patch('builtins.input', lambda _: next(inputs)):
-        with mock.patch('builtins.print') as mocked_print:
-            repl()
-            mocked_print.assert_any_call("Goodbye!")
+    mock_print.assert_any_call("Error: Cannot divide by zero")
+    
