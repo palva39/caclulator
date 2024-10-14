@@ -73,3 +73,12 @@ def test_repl_divide_by_zero():
             repl()
 
     mock_print.assert_any_call("Error: Cannot divide by zero")
+
+def test_repl_insufficient_arguments():
+    """Test REPL with insufficient arguments."""
+    user_inputs = ['add 2', 'exit']
+    with mock.patch('builtins.input', side_effect=user_inputs):
+        with mock.patch('builtins.print') as mock_print:
+            repl()
+    mock_print.assert_any_call("Error: Invalid input format. Use: <command> <num1> <num2>")
+    
