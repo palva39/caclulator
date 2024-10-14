@@ -1,6 +1,6 @@
 # tests/test_main.py
 import pytest
-from calculator.main import parse_command
+from main import parse_command
 
 def test_parse_command_add():
     command, num1, num2 = parse_command("add 2 3")
