@@ -4,10 +4,11 @@ and uses user input to test it with mock.
 """
 
 from unittest import mock
-import pytest
-from main import repl, parse_command
-from calculator.commands import PluginLoader
 import os
+from main import repl, parse_command
+import pytest
+from calculator.commands import PluginLoader
+
 
 # Initialize PluginLoader for the tests
 plugin_directory = os.path.join(os.path.dirname(__file__), '../calculator/plugins')
