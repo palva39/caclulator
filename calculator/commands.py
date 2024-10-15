@@ -1,5 +1,3 @@
-# Clean the remaining erroneous code completely from `commands.py`
-final_clean_plugin_loader_code = """
 import importlib
 import os
 from abc import ABC, abstractmethod
@@ -29,4 +27,3 @@ class PluginLoader:
 
     def get_command(self, command_name):
         return self.commands.get(command_name)
-"""
