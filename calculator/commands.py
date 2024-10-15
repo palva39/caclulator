@@ -30,10 +30,3 @@ class PluginLoader:
     def get_command(self, command_name):
         return self.commands.get(command_name)
 """
-
-# Write the final cleaned-up code to `commands.py`
-with open(commands_file_path, 'w') as file:
-    file.write(final_clean_plugin_loader_code)
-
-# Confirm cleanup is done
-commands_file_path
