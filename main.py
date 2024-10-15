@@ -1,5 +1,9 @@
 # main.py
-from calculator.commands import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
+from calculator.commands import PluginLoader
+
+# Initialize the PluginLoader
+plugin_loader = PluginLoader('calculator.plugins')
+plugin_loader.load_plugins()
 
 def parse_command(input_str):
     """Parse the user input to identify the command and its arguments."""
@@ -14,21 +18,17 @@ def parse_command(input_str):
     except ValueError:
         raise ValueError("Invalid numbers provided.")
 
-    if command_str == 'add':
-        return AddCommand(), num1, num2
-    elif command_str == 'subtract':
-        return SubtractCommand(), num1, num2
-    elif command_str == 'multiply':
-        return MultiplyCommand(), num1, num2
-    elif command_str == 'divide':
-        return DivideCommand(), num1, num2
+    # Use the plugin loader to get the command dynamically
+    command_class = plugin_loader.get_command(command_str.capitalize() + 'Command')
+    if command_class:
+        return command_class, num1, num2
     else:
         raise ValueError(f"Unknown command: {command_str}")
 
 def repl():
     """Start the REPL loop."""
     print("Welcome to the interactive calculator!")
-    print("Available commands: add, subtract, multiply, divide")
+    print("Available commands:", ', '.join([cmd[:-7].lower() for cmd in plugin_loader.commands.keys()]))
     print("Usage: <command> <num1> <num2> (example: add 2 3)")
     print("Type 'exit' to quit.")
 
