@@ -40,7 +40,7 @@ class PluginLoader:
 """
 
 # Write the updated plugin loader implementation to the commands.py file
-with open(commands_file_path, 'w') as file:
+with open(calculator.commands, 'w') as file:
     file.write(plugin_loader_code)
 
 # Create the 'plugins' directory for storing command plugins
