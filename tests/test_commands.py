@@ -3,9 +3,9 @@ Unit tests for PluginLoader in commands.py module.
 This module tests the functionality of dynamically loading 
 calculator commands (add, subtract, multiply, divide).
 """
-from calculator.commands import PluginLoader
-import pytest
 import os
+import pytest
+from calculator.commands import PluginLoader
 
 # Initialize the plugin loader for the tests
 plugin_directory = os.path.join(os.path.dirname(__file__), '../calculator/plugins')
