@@ -1,6 +1,5 @@
-"""Refactor `commands.py` to introduce PluginLoader for dynamic command loading"""
-
-plugin_loader_code = """
+# Remove the erroneous code from `commands.py`
+clean_plugin_loader_code = """
 import importlib
 import os
 from abc import ABC, abstractmethod
@@ -30,22 +29,11 @@ class PluginLoader:
 
     def get_command(self, command_name):
         return self.commands.get(command_name)
-
-# Example usage:
-# loader = PluginLoader('calculator/plugins')
-# loader.load_plugins()
-# command = loader.get_command('AddCommand')
-# if command:
-#     result = command.execute(1, 2)
 """
 
-# Write the updated plugin loader implementation to the commands.py file
-with open(calculator.commands, 'w') as file:
-    file.write(plugin_loader_code)
+# Write the corrected code to `commands.py`
+with open(commands_file_path, 'w') as file:
+    file.write(clean_plugin_loader_code)
 
-# Create the 'plugins' directory for storing command plugins
-plugins_dir = os.path.join(calculator_dir, 'plugins')
-os.makedirs(plugins_dir, exist_ok=True)
-
-# Provide feedback on the next steps to create plugin command files
-plugins_dir
+# Confirm the fix has been applied successfully
+commands_file_path
