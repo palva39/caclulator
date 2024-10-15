@@ -1,8 +1,12 @@
 # main.py
+import os
 from calculator.commands import PluginLoader
 
-# Initialize the PluginLoader
-plugin_loader = PluginLoader('calculator.plugins')
+# Calculate the actual file system path to the 'plugins' directory
+plugin_directory = os.path.join(os.path.dirname(__file__), 'calculator', 'plugins')
+
+# Initialize the PluginLoader with the correct path
+plugin_loader = PluginLoader(plugin_directory)
 plugin_loader.load_plugins()
 
 def parse_command(input_str):
