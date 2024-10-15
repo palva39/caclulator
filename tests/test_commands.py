@@ -1,32 +1,38 @@
 """
-Unit tests for commands.py module.
-This module tests the functionality of the calculator commands (add, subtract, multiply, divide).
+Unit tests for PluginLoader in commands.py module.
+This module tests the functionality of dynamically loading calculator commands (add, subtract, multiply, divide).
 """
 
 import pytest
-from calculator.commands import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
+from calculator.commands import PluginLoader
+import os
+
+# Initialize the plugin loader for the tests
+plugin_directory = os.path.join(os.path.dirname(__file__), '../calculator/plugins')
+plugin_loader = PluginLoader(plugin_directory)
+plugin_loader.load_plugins()
 
 def test_add_command():
-    """Test the AddCommand functionality."""
-    command = AddCommand()
+    """Test the AddCommand functionality loaded via PluginLoader."""
+    command = plugin_loader.get_command('AddCommand')
     assert command.execute(2, 3) == 5
     assert command.execute(-1, 1) == 0
 
 def test_subtract_command():
-    """Test the SubtractCommand functionality."""
-    command = SubtractCommand()
+    """Test the SubtractCommand functionality loaded via PluginLoader."""
+    command = plugin_loader.get_command('SubtractCommand')
     assert command.execute(5, 3) == 2
     assert command.execute(0, 5) == -5
 
 def test_multiply_command():
-    """Test the MultiplyCommand functionality."""
-    command = MultiplyCommand()
+    """Test the MultiplyCommand functionality loaded via PluginLoader."""
+    command = plugin_loader.get_command('MultiplyCommand')
     assert command.execute(2, 3) == 6
     assert command.execute(-1, 3) == -3
 
 def test_divide_command():
-    """Test the DivideCommand functionality, including division by zero."""
-    command = DivideCommand()
+    """Test the DivideCommand functionality, including division by zero, loaded via PluginLoader."""
+    command = plugin_loader.get_command('DivideCommand')
     assert command.execute(6, 3) == 2
     assert command.execute(5, 2) == 2.5
 
@@ -34,13 +40,13 @@ def test_divide_command():
         command.execute(5, 0)
 
 def test_add_command_invalid_input():
-    """Test AddCommand with invalid inputs."""
-    command = AddCommand()
+    """Test AddCommand with invalid inputs loaded via PluginLoader."""
+    command = plugin_loader.get_command('AddCommand')
     with pytest.raises(TypeError):
         command.execute("a", 3)
 
 def test_subtract_command_invalid_input():
-    """Test SubtractCommand with invalid inputs."""
-    command = SubtractCommand()
+    """Test SubtractCommand with invalid inputs loaded via PluginLoader."""
+    command = plugin_loader.get_command('SubtractCommand')
     with pytest.raises(TypeError):
         command.execute("a", "b")
