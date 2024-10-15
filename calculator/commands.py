@@ -1,4 +1,5 @@
-# commands.py
+import importlib
+import os
 from abc import ABC, abstractmethod
 
 class Command(ABC):
@@ -6,20 +7,23 @@ class Command(ABC):
     def execute(self, *args):
         pass
 
-class AddCommand(Command):
-    def execute(self, a, b):
-        return a + b
+class PluginLoader:
+    def __init__(self, plugin_directory):
+        self.plugin_directory = plugin_directory
+        self.commands = {}
 
-class SubtractCommand(Command):
-    def execute(self, a, b):
-        return a - b
+    def load_plugins(self):
+        # Iterate over files in the plugin directory
+        for filename in os.listdir(self.plugin_directory):
+            if filename.endswith('.py') and filename != '__init__.py':
+                # Import the module dynamically
+                module_name = filename[:-3]
+                module = importlib.import_module(f'calculator.plugins.{module_name}')
+                # Register all commands from the plugin
+                for attr in dir(module):
+                    cls = getattr(module, attr)
+                    if isinstance(cls, type) and issubclass(cls, Command) and cls is not Command:
+                        self.commands[cls.__name__] = cls()
 
-class MultiplyCommand(Command):
-    def execute(self, a, b):
-        return a * b
-
-class DivideCommand(Command):
-    def execute(self, a, b):
-        if b == 0:
-            raise ValueError("Cannot divide by zero")
-        return a / b
+    def get_command(self, command_name):
+        return self.commands.get(command_name)
