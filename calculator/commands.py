@@ -1,5 +1,5 @@
-# Remove the erroneous code from `commands.py`
-clean_plugin_loader_code = """
+# Clean the remaining erroneous code completely from `commands.py`
+final_clean_plugin_loader_code = """
 import importlib
 import os
 from abc import ABC, abstractmethod
@@ -31,9 +31,9 @@ class PluginLoader:
         return self.commands.get(command_name)
 """
 
-# Write the corrected code to `commands.py`
+# Write the final cleaned-up code to `commands.py`
 with open(commands_file_path, 'w') as file:
-    file.write(clean_plugin_loader_code)
+    file.write(final_clean_plugin_loader_code)
 
-# Confirm the fix has been applied successfully
+# Confirm cleanup is done
 commands_file_path
