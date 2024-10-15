@@ -5,8 +5,8 @@ and uses user input to test it with mock.
 
 from unittest import mock
 import os
-from main import repl, parse_command
 import pytest
+from main import repl, parse_command
 from calculator.commands import PluginLoader
 
 
