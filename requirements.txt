@@ -1,6 +1,6 @@
 astroid==3.2.4
 blinker==1.4
-#command-not-found==0.3
+command-not-found==0.3
 coverage==7.6.1
 cryptography==3.4.8
 dbus-python==1.2.18
@@ -11,6 +11,7 @@ distro-info==1.1+ubuntu0.1
 exceptiongroup==1.2.2
 Faker==30.3.0
 filelock==3.16.1
+flake8==7.1.1
 httplib2==0.20.2
 importlib-metadata==4.6.4
 iniconfig==2.0.0
@@ -30,6 +31,8 @@ packaging==24.1
 platformdirs==4.3.6
 pluggy==1.5.0
 pycairo==1.27.0
+pycodestyle==2.12.1
+pyflakes==3.2.0
 PyGObject==3.42.1
 PyJWT==2.3.0
 pylint==3.2.7
