@@ -21,12 +21,15 @@ launchpadlib==1.10.16
 lazr.restfulclient==0.14.4
 lazr.uri==1.0.6
 mccabe==0.7.0
+meson==1.5.2
 more-itertools==8.10.0
 netifaces==0.11.0
+ninja==1.11.1.1
 oauthlib==3.2.0
 packaging==24.1
 platformdirs==4.3.6
 pluggy==1.5.0
+pycairo==1.27.0
 PyGObject==3.42.1
 PyJWT==2.3.0
 pylint==3.2.7
