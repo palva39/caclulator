@@ -5,3 +5,30 @@
 2024-10-16 14:17:25 - __main__ - INFO - Command found: DivideCommand
 2024-10-16 14:17:25 - __main__ - INFO - Command executed successfully: DivideCommand with result 1.5
 2024-10-16 14:17:27 - __main__ - INFO - User exited the program.
+2024-10-16 14:18:01 - main - INFO - Plugin directory: /home/IS218/calculator/plugins
+2024-10-16 14:18:01 - main - INFO - Command found: AddCommand
+2024-10-16 14:18:01 - main - INFO - Command found: SubtractCommand
+2024-10-16 14:18:01 - main - INFO - Command found: MultiplyCommand
+2024-10-16 14:18:01 - main - INFO - Command found: DivideCommand
+2024-10-16 14:18:01 - main - INFO - Command found: DivideCommand
+2024-10-16 14:18:01 - main - ERROR - Unknown command: invalid
+2024-10-16 14:18:01 - main - INFO - Starting the REPL loop.
+2024-10-16 14:18:01 - main - INFO - Command found: AddCommand
+2024-10-16 14:18:01 - main - INFO - Command executed successfully: AddCommand with result 5.0
+2024-10-16 14:18:01 - main - INFO - User exited the program.
+2024-10-16 14:18:01 - main - INFO - Starting the REPL loop.
+2024-10-16 14:18:01 - main - INFO - Command found: SubtractCommand
+2024-10-16 14:18:01 - main - INFO - Command executed successfully: SubtractCommand with result 2.0
+2024-10-16 14:18:01 - main - INFO - User exited the program.
+2024-10-16 14:18:01 - main - INFO - Starting the REPL loop.
+2024-10-16 14:18:01 - main - ERROR - Unknown command: invalid_command
+2024-10-16 14:18:01 - main - ERROR - Error: Unknown command: invalid_command
+2024-10-16 14:18:01 - main - INFO - User exited the program.
+2024-10-16 14:18:01 - main - INFO - Starting the REPL loop.
+2024-10-16 14:18:01 - main - INFO - Command found: DivideCommand
+2024-10-16 14:18:01 - main - ERROR - Error: Cannot divide by zero
+2024-10-16 14:18:01 - main - INFO - User exited the program.
+2024-10-16 14:18:01 - main - INFO - Starting the REPL loop.
+2024-10-16 14:18:01 - main - ERROR - Invalid input format. Use: <command> <num1> <num2>
+2024-10-16 14:18:01 - main - ERROR - Error: Invalid input format. Use: <command> <num1> <num2>
+2024-10-16 14:18:01 - main - INFO - User exited the program.
