@@ -34,7 +34,7 @@ jobs:
 
     - name: Install project dependencies
       run: |
-        pip install --prefer-binary -r requirements.txt
+        pip install --prefer-binary -r requirements-linux.txt
 
     - name: Run tests
       run: pytest
