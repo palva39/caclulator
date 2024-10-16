@@ -35,6 +35,9 @@ jobs:
     - name: Install project dependencies
       run: |
         pip install --prefer-binary -r requirements-linux.txt || true  # Ignore missing packages errors
+    
+    - name: Ensure Faker is installed
+      run: pip install Faker
 
     - name: Run tests
       run: pytest
