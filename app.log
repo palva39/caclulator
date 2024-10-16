@@ -1,0 +1,7 @@
+2024-10-16 14:17:17 - __main__ - INFO - Plugin directory: /home/IS218/calculator/plugins
+2024-10-16 14:17:17 - __main__ - INFO - Starting the REPL loop.
+2024-10-16 14:17:21 - __main__ - INFO - Command found: AddCommand
+2024-10-16 14:17:21 - __main__ - INFO - Command executed successfully: AddCommand with result 5.0
+2024-10-16 14:17:25 - __main__ - INFO - Command found: DivideCommand
+2024-10-16 14:17:25 - __main__ - INFO - Command executed successfully: DivideCommand with result 1.5
+2024-10-16 14:17:27 - __main__ - INFO - User exited the program.
