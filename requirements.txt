@@ -38,7 +38,6 @@ pyparsing==2.4.7
 pytest==8.3.3
 pytest-cov==5.0.0
 pytest-pylint==0.21.0
-python-apt==2.4.0+ubuntu2
 python-dateutil==2.9.0.post0
 PyYAML==5.4.1
 SecretStorage==3.3.1
