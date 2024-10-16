@@ -37,7 +37,7 @@ def parse_command(input_str):
     # Use the plugin loader to get the command dynamically
     command_class = plugin_loader.get_command(command_str.capitalize() + 'Command')
     if command_class:
-        logger.info(f"Command found: {command_class.__name__}")
+        logger.info(f"Command found: {command_class.__class__.__name__}")
         return command_class, num1, num2
     else:
         logger.error(f"Unknown command: {command_str}")
@@ -61,7 +61,8 @@ def repl():
         try:
             command, num1, num2 = parse_command(user_input)
             result = command.execute(num1, num2)
-            logger.info(f"Command executed successfully: {command.__name__} with result {result}")
+            # Logging the command execution and result
+            logger.info(f"Command executed successfully: {command.__class__.__name__} with result {result}")
             print(f"Result: {result}")
         except Exception as e:
             logger.error(f"Error: {e}")
