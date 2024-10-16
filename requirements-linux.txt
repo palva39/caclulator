@@ -20,7 +20,7 @@ jeepney==0.7.1
 keyring==23.5.0
 launchpadlib==1.10.16
 lazr.restfulclient==0.14.6
-lazr.uri==1.0.6
+lazr.uri
 mccabe==0.7.0
 meson==1.5.2
 more-itertools==8.10.0
