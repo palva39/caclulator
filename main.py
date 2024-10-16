@@ -1,5 +1,7 @@
 # main.py
 import os
+import logging
+import logging.config
 from calculator.commands import PluginLoader
 
 # Calculate the actual file system path to the 'plugins' directory
@@ -51,3 +53,22 @@ def repl():
 
 if __name__ == "__main__":
     repl()
+
+"""Load the logging configuration from logging.conf"""
+logging.config.fileConfig('logging.conf')
+
+# Create a logger
+logger = logging.getLogger(__name__)
+
+def main():
+    # Example log messages
+    logger.debug("Debug message")
+    logger.info("Info message")
+    logger.warning("Warning message")
+    logger.error("Error message")
+    logger.critical("Critical message")
+
+    print("Running the main application...")
+
+if __name__ == "__main__":
+    main()
